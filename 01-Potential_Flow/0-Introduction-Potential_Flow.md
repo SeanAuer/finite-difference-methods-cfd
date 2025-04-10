@@ -9,8 +9,9 @@
 4. [Numerical Solution Methods (Finite Difference)](#14-numerical-solution-methods-finite-difference)  
    - [1D Laplace Equation](#141-one-dimensional-laplace-equation)  
    - [2D Laplace Equation](#142-two-dimensional-laplace-equation)  
-5. [Solution Methods for Laplace Equation](#15-solution-methods-for-laplace-equation)  
-6. [Python Implementation Note](#16-python-implementation-note)
+5. [Solution Methods for Laplace's Equation](#15-solution-methods-for-laplaces-equation)  
+6. [Boundary Conditions](#16-boundary-conditions)
+7. [Python Implementation Note](#17-python-implementation-note)
 
 ---
 
@@ -177,6 +178,14 @@ For Laplace’s equation in 1D or 2D, we generally solve this system using **ite
 
 The **Jacobi method** is the simplest iterative solver. It updates all grid points **simultaneously** using only values from the previous iteration.
 
+For a 1D uniform grid:
+
+$$
+\phi_{i}^{(n+1)} = \frac{1}{2} \left( 
+\phi_{i+1}^{(n)} + \phi_{i-1}^{(n)}
+\right)
+$$
+
 For a 2D uniform grid:
 
 $$
@@ -268,7 +277,35 @@ In this module, we use **Jacobi iteration** due to its simplicity and transparen
 
 ---
 
-## 1.6. Python Implementation Note
+## 1.6. Boundary Conditions
+
+When solving Laplace’s equation numerically, the boundary conditions must be specified to ensure a well-posed problem and allow convergence of the iterative solution.
+
+For the examples in this module, we will apply **Dirichlet boundary conditions** — that is, the value of $\phi$ is fixed along the boundary.
+
+### 1D Example:
+Let the domain be $x \in [0, 1]$ with a uniform grid of $N$ points. We specify:
+
+- $\phi(0) = \phi_0$ (left boundary)
+- $\phi(1) = \phi_N$ (right boundary)
+
+These values remain **fixed throughout** the Jacobi iterations and are **not updated**.
+
+### 2D Example:
+For a rectangular domain, we fix $\phi$ along all four sides:
+
+- $\phi(x=0, y)$ = left wall  
+- $\phi(x=1, y)$ = right wall  
+- $\phi(x, y=0)$ = bottom wall  
+- $\phi(x, y=1)$ = top wall
+
+These boundaries encode the **physical constraints** of the problem — such as temperature, pressure, or potential — depending on the application.
+
+> Boundary values act as anchors: they influence interior grid points but do not change during the iteration process.
+
+
+---
+## 1.7. Python Implementation Note
 
 In the next notebook (`1-Solve-Potential_Flow.ipynb`), we implement a 2D finite difference solver for Laplace’s equation over a simple rectangular domain with Dirichlet boundary conditions.
 
