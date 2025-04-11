@@ -88,12 +88,14 @@ Let $\phi_i = \phi(x_i)$ be the value of a function at point $x_i$, with uniform
 
 ### **Second Derivative: $\frac{\partial^2 \phi}{\partial x^2}$**
 
-| Method | Approximation | Order |
-|--------|---------------|-------|
-| **Forward-biased** | $\displaystyle \frac{-3\phi_{i} + 4\phi_{i+1} - \phi_{i+2}}{2\Delta x}$ | 𝒪($\Delta x^2$) |
-| **Backward-biased** | $\displaystyle \frac{3\phi_{i} - 4\phi_{i-1} + \phi_{i-2}}{2\Delta x}$ | 𝒪($\Delta x^2$) |
-| **Centered Difference** | $\displaystyle \frac{\phi_{i+1} - 2\phi_i + \phi_{i-1}}{\Delta x^2}$ | 𝒪($\Delta x^2$) |
+| Method               | Approximation                                                             | Order         |
+|----------------------|---------------------------------------------------------------------------|---------------|
+| **Forward-biased**   | $\displaystyle \frac{-\phi_{i+2} + 4\phi_{i+1} - 5\phi_i + 2\phi_{i-1}}{\Delta x^2}$ | 𝒪($\Delta x^2$) |
+| **Backward-biased**  | $\displaystyle \frac{-\phi_{i-2} + 4\phi_{i-1} - 5\phi_i + 2\phi_{i+1}}{\Delta x^2}$ | 𝒪($\Delta x^2$) |
+| **Central Difference** | $\displaystyle \frac{\phi_{i+1} - 2\phi_i + \phi_{i-1}}{\Delta x^2}$              | 𝒪($\Delta x^2$) |
 | **Five-Point Stencil** *(optional)* | $\displaystyle \frac{-\phi_{i+2} + 16\phi_{i+1} - 30\phi_i + 16\phi_{i-1} - \phi_{i-2}}{12\Delta x^2}$ | 𝒪($\Delta x^4$) |
+
+
 
 **🔍 What does "Order" mean?**  
 The *order of a finite difference method* tells us how the error behaves as we shrink the grid spacing $\Delta x$.  
